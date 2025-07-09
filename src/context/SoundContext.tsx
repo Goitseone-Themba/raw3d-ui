@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, type ReactNode, useState } from 'react';
 
 interface SoundContextType {
     soundOn: boolean;
@@ -7,7 +7,7 @@ interface SoundContextType {
 
 export const SoundContext = createContext<SoundContextType>({
     soundOn: true,
-    toggleSound: () => {},
+    toggleSound: () => { },
 });
 
 export const SoundProvider = ({ children }: { children: ReactNode }) => {
