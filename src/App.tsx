@@ -9,7 +9,6 @@ export default function App() {
         <MuteSwitch />
         <Button3D aria-label="Left Arrow">←</Button3D>
         <Button3D aria-label="Right Arrow">→</Button3D>
-        <Button3D aria-label="Modern Left Arrow" variant="modern">←</Button3D>
       </div>
     </SoundProvider>
   );
