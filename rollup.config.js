@@ -19,7 +19,7 @@ export default defineConfig({
     },
   ],
   plugins: [
-    url({ include: ['**/*.wav'], limit: 1000000 }), // Inline if < 1MB, otherwise emit as file
+    url({ include: ['**/*.wav'], limit: 1000000 }),
     nodeResolve(),
     commonjs(),
     typescript({
@@ -28,5 +28,5 @@ export default defineConfig({
       declarationDir: 'dist',
     }),
   ],
-  external: ['react', 'react-dom', 'framer-motion'],
+  external: ['react', 'react-dom', 'framer-motion', 'styled-components'],
 });

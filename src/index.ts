@@ -1,3 +1,11 @@
 export { Button3D } from './components/Button3D';
-export { SoundProvider, SoundContext } from './context/SoundContext';
-export { MuteSwitch } from './components/MuteSwitch';
+export { Input3D } from './components/Input3D';
+export { Card3D } from './components/Card3D';
+export { Modal3D } from './components/Modal3D';
+export { Dropdown3D } from './components/Dropdown3D';
+export { Navbar3D } from './components/Navbar3D';
+export { Table3D } from './components/Table3D';
+export { Alert3D } from './components/Alert3D';
+export { Tooltip3D } from './components/Tooltip3D';
+export { ProgressBar3D } from './components/ProgressBar3D';
+export { SoundProvider } from './context/SoundContext';
