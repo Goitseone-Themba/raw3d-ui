@@ -1,7 +1,12 @@
-// src/components/Navbar3D.tsx
+import React from 'react';
 import styled from 'styled-components';
 
-const Navbar3D = styled.nav`
+interface Navbar3DProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+const Nav = styled.nav`
   background: linear-gradient(145deg, #f5f5e8, #e0e0d0);
   border: 2px solid #d4d4c4;
   border-radius: 6px;
@@ -10,6 +15,9 @@ const Navbar3D = styled.nav`
   transform: perspective(1000px) translateZ(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-family: 'Comic Sans MS', cursive, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   a {
     color: #333;
@@ -23,4 +31,6 @@ const Navbar3D = styled.nav`
   }
 `;
 
-export { Navbar3D };
+export const Navbar3D = ({ children, className }: Navbar3DProps) => {
+  return <Nav className={className}>{children}</Nav>;
+};
