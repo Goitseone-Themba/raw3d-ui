@@ -1,7 +1,13 @@
-// src/components/Card3D.tsx
+import React from 'react';
 import styled from 'styled-components';
 
-const Card3D = styled.div`
+interface Card3DProps {
+  children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
+}
+
+const CardContainer = styled.div`
   background: linear-gradient(145deg, #f5f5e8, #e0e0d0);
   border: 2px solid #d4d4c4;
   border-radius: 10px;
@@ -31,4 +37,10 @@ const Card3D = styled.div`
   }
 `;
 
-export { Card3D };
+export const Card3D = ({ children, className, onClick }: Card3DProps) => {
+  return (
+    <CardContainer className={className} onClick={onClick}>
+      {children}
+    </CardContainer>
+  );
+};
