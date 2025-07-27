@@ -1,7 +1,11 @@
-// src/components/Input3D.tsx
+import React from 'react';
 import styled from 'styled-components';
 
-const Input3D = styled.input`
+interface Input3DProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  className?: string;
+}
+
+const Input = styled.input`
   background: linear-gradient(145deg, #f5f5e8, #e0e0d0);
   border: 2px solid #d4d4c4;
   border-radius: 6px;
@@ -20,4 +24,6 @@ const Input3D = styled.input`
   }
 `;
 
-export { Input3D };
+export const Input3D = (props: Input3DProps) => {
+  return <Input {...props} />;
+};
