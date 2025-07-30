@@ -23,4 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# Rollup cache
+.rollup.cache/
+
+# TypeScript build info
+*.tsbuildinfo
+
 *storybook.log
