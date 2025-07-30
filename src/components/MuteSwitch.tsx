@@ -1,6 +1,6 @@
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useContext } from 'react';
-import { SoundContext } from '../context/SoundContext';
+import { SoundContext } from '../context/SoundContextTypes';
 
 /**
  * Props for the MuteSwitch component.
@@ -30,14 +30,14 @@ const MuteSwitchStyled = styled.button<MuteSwitchProps>`
   top: 16px;
   left: 16px;
   padding: 8px;
-  background-color: #d1d5db;
+  background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: 6px;
-  border: 2px solid #1f2937;
+  border: 2px solid ${({ theme }) => theme.colors.border};
   cursor: pointer;
   font-size: 24px;
 
   &:hover {
-    background-color: #e5e7eb;
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 
   &:active {

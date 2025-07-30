@@ -9,32 +9,32 @@ interface Dropdown3DProps {
 
 const DropdownContainer = styled.div`
   position: relative;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: ${({ theme }) => theme.fonts.main};
 `;
 
 const DropdownToggle = styled.button`
-  background: linear-gradient(145deg, #f5f5e8, #e0e0d0);
-  border: 2px solid #d4d4c4;
+  background: linear-gradient(145deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.secondary});
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 6px;
   padding: 10px 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: ${({ theme }) => theme.shadows.light};
   transform: perspective(1000px) translateZ(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 
   &:hover {
     transform: perspective(1000px) translateZ(15px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: ${({ theme }) => theme.shadows.medium};
   }
 `;
 
 const DropdownMenu = styled.ul<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-  background: linear-gradient(145deg, #f5f5e8, #e0e0d0);
-  border: 2px solid #d4d4c4;
+  background: linear-gradient(145deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.secondary});
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 6px;
   padding: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: ${({ theme }) => theme.shadows.dark};
   transform: perspective(1000px) translateZ(20px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: absolute;
@@ -49,7 +49,7 @@ const DropdownMenu = styled.ul<{ isOpen: boolean }>`
     cursor: pointer;
 
     &:hover {
-      background: #e0e0d0;
+      background: ${({ theme }) => theme.colors.secondary};
     }
   }
 `;

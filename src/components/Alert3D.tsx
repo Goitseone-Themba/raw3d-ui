@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Button3D } from './Button3D';
 
 interface Alert3DProps {
   title: string;
@@ -37,20 +36,20 @@ const AlertContainer = styled.div<{ variant: 'info' | 'success' | 'warning' | 'e
   display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
   justify-content: space-between;
   align-items: flex-start;
-  border: 2px solid #d4d4c4;
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 6px;
   padding: 15px 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: ${({ theme }) => theme.shadows.light};
   transform: perspective(1000px) translateZ(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: ${({ theme }) => theme.fonts.main};
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
 
   ${({ variant }) => variantStyles[variant]}
 
   &:hover {
     transform: perspective(1000px) translateZ(15px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: ${({ theme }) => theme.shadows.medium};
   }
 `;
 

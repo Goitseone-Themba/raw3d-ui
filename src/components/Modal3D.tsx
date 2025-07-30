@@ -20,11 +20,11 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
 `;
 
 const ModalContainer = styled.div`
-  background: linear-gradient(145deg, #f5f5e8, #e0e0d0);
-  border: 2px solid #d4d4c4;
+  background: linear-gradient(145deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.secondary});
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: ${({ theme }) => theme.shadows.dark};
   transform: perspective(1000px) translateZ(50px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: fixed;
@@ -32,7 +32,7 @@ const ModalContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: ${({ theme }) => theme.fonts.main};
 
   &:hover {
     transform: translate(-50%, -50%) perspective(1000px) translateZ(60px);

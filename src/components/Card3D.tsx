@@ -8,17 +8,17 @@ interface Card3DProps {
 }
 
 const CardContainer = styled.div`
-  background: linear-gradient(145deg, #f5f5e8, #e0e0d0);
-  border: 2px solid #d4d4c4;
+  background: linear-gradient(145deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.secondary});
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: ${({ theme }) => theme.shadows.dark};
   transform: perspective(1000px) rotateX(10deg) rotateY(5deg);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: ${({ theme }) => theme.fonts.main};
 
   &:hover {
     transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.05);

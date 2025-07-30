@@ -1,7 +1,6 @@
-// src/components/Button3D.tsx
 import styled from 'styled-components';
-import React, { useContext } from 'react';
-import { SoundContext } from '../context/SoundContext';
+import React from 'react';
+import { useSound } from '../hooks/useSound';
 import clickSound from '../assets/keyboard-key-release.wav';
 
 /**
@@ -11,30 +10,32 @@ import clickSound from '../assets/keyboard-key-release.wav';
  * @property {string} [className] - Additional CSS classes for customization. Optional.
  * @property {string} ['aria-label'] - Accessibility label for the button. Optional.
  * @property {'keycap' | 'drawn'} [variant] - The style variant of the button. Defaults to 'drawn'.
+ * @property {() => void} [onClick] - Custom click handler. Optional.
  */
 interface Button3DProps {
   children: string | React.ReactNode;
   className?: string;
   'aria-label'?: string;
   variant?: 'keycap' | 'drawn';
+  onClick?: () => void;
 }
 
 const DrawnButton = styled.button`
-  background: linear-gradient(145deg, #f5f5e8, #e0e0d0);
-  border: 2px solid #d4d4c4;
+  background: linear-gradient(145deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.secondary});
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 6px;
   padding: 10px 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: ${({ theme }) => theme.shadows.light};
   transform: perspective(1000px) translateZ(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: ${({ theme }) => theme.fonts.main};
   font-size: 1rem;
-  color: #333;
+  color: ${({ theme }) => theme.colors.text};
 
   &:hover {
     transform: perspective(1000px) translateZ(15px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: ${({ theme }) => theme.shadows.medium};
   }
 
   &:active {
@@ -54,15 +55,15 @@ const KeycapButton = styled.button`
   margin: 0;
   cursor: pointer;
   perspective: 1000px;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: ${({ theme }) => theme.fonts.main};
   font-size: 1rem;
-  color: #333;
+  color: ${({ theme }) => theme.colors.text};
 
   .top {
     width: 100%;
     height: 100%;
     padding: 12px 24px;
-    background: linear-gradient(145deg, #f5f5e8, #e0e0d0);
+    background: linear-gradient(145deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.secondary});
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-weight: 500;
@@ -72,7 +73,7 @@ const KeycapButton = styled.button`
     justify-content: center;
     border-radius: 6px;
     border: 2px solid #2a2a2a;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), ${({ theme }) => theme.shadows.light};
     position: relative;
     overflow: hidden;
     transform: translateZ(10px);
@@ -81,7 +82,7 @@ const KeycapButton = styled.button`
 
     &:hover {
       background: linear-gradient(145deg, #ffffff, #e5e5d5);
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), ${({ theme }) => theme.shadows.medium};
     }
 
     &:active {
@@ -110,7 +111,7 @@ const KeycapButton = styled.button`
     left: 0;
     border-radius: 6px;
     border: 2px solid #2a2a2a;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: ${({ theme }) => theme.shadows.light};
     z-index: -1;
     transform: translateZ(0);
 
@@ -128,7 +129,7 @@ const KeycapButton = styled.button`
     left: -1px;
     border-radius: 6px;
     border: 2px solid #2a2a2a;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: ${({ theme }) => theme.shadows.medium};
     z-index: -2;
     transform: translateZ(-10px);
   }
@@ -153,22 +154,39 @@ const KeycapButton = styled.button`
  * }
  * ```
  */
-export const Button3D = ({ children, className, 'aria-label': ariaLabel, variant = 'drawn' }: Button3DProps) => {
-  const { soundOn } = useContext(SoundContext);
-  const playSound = () => {
-    if (soundOn) new Audio(clickSound).play();
+export const Button3D = ({ 
+  children, 
+  className, 
+  'aria-label': ariaLabel, 
+  variant = 'drawn',
+  onClick 
+}: Button3DProps) => {
+  const { playCustom } = useSound();
+  
+  const handleClick = () => {
+    // Play the mechanical keyboard sound
+    playCustom({
+      src: clickSound,
+      volume: 0.6,
+      playbackRate: 1.0
+    });
+    
+    // Call custom onClick if provided
+    if (onClick) {
+      onClick();
+    }
   };
 
   return (
     <>
       {variant === 'keycap' ? (
-        <KeycapButton className={className} onClick={playSound} aria-label={ariaLabel}>
+        <KeycapButton className={className} onClick={handleClick} aria-label={ariaLabel}>
           <div className="top">{children}</div>
           <div className="bottom" />
           <div className="base" />
         </KeycapButton>
       ) : (
-        <DrawnButton className={className} onClick={playSound} aria-label={ariaLabel}>
+        <DrawnButton className={className} onClick={handleClick} aria-label={ariaLabel}>
           {children}
         </DrawnButton>
       )}

@@ -9,3 +9,5 @@ export { Alert3D } from './components/Alert3D';
 export { Tooltip3D } from './components/Tooltip3D';
 export { ProgressBar3D } from './components/ProgressBar3D';
 export { SoundProvider } from './context/SoundContext';
+export { SoundContext, type SoundConfig, type SoundContextType } from './context/SoundContextTypes';
+export { useSound } from './hooks/useSound';
