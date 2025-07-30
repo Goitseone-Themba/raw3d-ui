@@ -1,20 +1,5 @@
-import { createContext, type ReactNode, useState } from 'react';
-
-/**
- * The context type for sound management.
- * @interface SoundContextType
- * @property {boolean} soundOn - Whether sound effects are enabled.
- * @property {() => void} toggleSound - Function to toggle sound on/off.
- */
-interface SoundContextType {
-  soundOn: boolean;
-  toggleSound: () => void;
-}
-
-export const SoundContext = createContext<SoundContextType>({
-  soundOn: true,
-  toggleSound: () => {},
-});
+import { type ReactNode, useState, useCallback } from 'react';
+import { SoundContext, type SoundConfig } from './SoundContextTypes';
 
 /**
  * Provides sound management context to child components.
@@ -37,9 +22,25 @@ export const SoundContext = createContext<SoundContextType>({
  */
 export const SoundProvider = ({ children }: { children: ReactNode }) => {
   const [soundOn, setSoundOn] = useState(true);
-  const toggleSound = () => setSoundOn(!soundOn);
+  
+  const toggleSound = useCallback(() => setSoundOn(!soundOn), [soundOn]);
+  
+  const createAudio = useCallback((config: SoundConfig): HTMLAudioElement => {
+    const audio = new Audio(config.src);
+    audio.volume = config.volume ?? 0.5;
+    audio.playbackRate = config.playbackRate ?? 1;
+    return audio;
+  }, []);
+  
+  const playSound = useCallback((config: SoundConfig) => {
+    if (soundOn) {
+      const audio = createAudio(config);
+      audio.play().catch(console.error);
+    }
+  }, [soundOn, createAudio]);
+
   return (
-    <SoundContext.Provider value={{ soundOn, toggleSound }}>
+    <SoundContext.Provider value={{ soundOn, toggleSound, playSound, createAudio }}>
       {children}
     </SoundContext.Provider>
   );
