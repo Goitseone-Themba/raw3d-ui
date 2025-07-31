@@ -1,4 +1,4 @@
-export { Button3D } from './components/Button3D';
+export { Button3D } from './components/Button3D/Button3D';
 export { Input3D } from './components/Input3D';
 export { Card3D } from './components/Card3D';
 export { Modal3D } from './components/Modal3D';

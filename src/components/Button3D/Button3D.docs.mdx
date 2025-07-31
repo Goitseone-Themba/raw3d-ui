@@ -1,0 +1,48 @@
+import { Meta, Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { Button3D } from './Button3D';
+
+<Meta title="Components/Button3D" component={Button3D} />
+
+# Button3D
+
+A tactile, 3D button inspired by mechanical keyboards. Use for primary actions where you want a satisfying, interactive feel and sound.
+
+## Usage
+
+```tsx
+import { Button3D } from 'raw3d-ui';
+
+<Button3D variant="keycap">Click me!</Button3D>
+```
+
+## Variants
+
+<Canvas>
+  <Story name="Keycap" args={{ children: 'Keycap', variant: 'keycap' }} />
+  <Story name="Drawn" args={{ children: 'Drawn', variant: 'drawn' }} />
+</Canvas>
+
+## Props
+
+<ArgsTable of={Button3D} />
+
+## Accessibility
+
+- Fully keyboard accessible
+- Supports `aria-label` for screen readers
+- Focus ring visible on tab
+
+## Design Guidelines
+
+- Use `keycap` for primary, tactile actions
+- Use `drawn` for secondary or less prominent actions
+- Keep button labels short and clear
+- Use icons or emojis for visual interest, but always provide an accessible label
+
+## Do/Don’t
+
+| Do | Don’t |
+|----|-------|
+| Use for main actions | Don’t use for navigation links |
+| Provide clear labels | Don’t use ambiguous icons only |
+| Use sound for feedback | Don’t overuse sound for every action | 
