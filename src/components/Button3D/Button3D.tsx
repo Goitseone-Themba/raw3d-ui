@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
-import { useSound } from '../hooks/useSound';
-import clickSound from '../assets/keyboard-key-release.wav';
+import { useSound } from '../../hooks/useSound';
+import clickSound from '../../assets/keyboard-key-release.wav';
 
 /**
  * Props for the Button3D component.
